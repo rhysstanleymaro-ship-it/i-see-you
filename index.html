@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>for you, love.</title>
+<meta name="description" content="an appreciation letter">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#f3ecdf;
+  --gold:#d8b26a;
+  --ink:#3a2f28;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;}
+html{scroll-snap-type:y mandatory; scroll-behavior:smooth; height:100%;}
+body{
+  margin:0; height:100%;
+  font-family:'Nunito Sans', sans-serif;
+  color:var(--ivory);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.stars-bg{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+.star{position:absolute; background:var(--ivory); border-radius:50%; opacity:.6;}
+@media (prefers-reduced-motion:no-preference){
+  .star{animation:twinkle 3.4s ease-in-out infinite;}
+}
+@keyframes twinkle{0%,100%{opacity:.15;} 50%{opacity:.9;}}
+
+.progress-track{
+  position:fixed; z-index:6; width:2px; background:rgba(243,236,223,.18);
+  right:calc(14px + env(safe-area-inset-right,0px));
+  top:calc(8vh + env(safe-area-inset-top,0px));
+  bottom:calc(8vh + env(safe-area-inset-bottom,0px));
+}
+.progress-star{
+  position:absolute; left:50%; top:0; width:9px; height:9px; border-radius:50%;
+  background:var(--gold); transform:translate(-50%,-50%);
+  box-shadow:0 0 10px 3px rgba(216,178,106,.65);
+  transition:top .15s linear;
+}
+
+.music-toggle{
+  position:fixed; z-index:6; left:calc(16px + env(safe-area-inset-left,0px));
+  bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:44px; height:44px; border-radius:50%; border:1px solid rgba(243,236,223,.35);
+  background:rgba(20,20,30,.35); color:var(--ivory); font-size:1.1rem;
+  backdrop-filter:blur(6px); cursor:pointer;
+}
+
+.scene{
+  position:relative; z-index:1; min-height:100svh; min-height:100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:4rem 1.6rem; scroll-snap-align:start; text-align:left;
+  transition:background-color .4s ease;
+}
+.scene.hero, .scene.closing{ text-align:center; }
+
+.eyebrow{ font-size:.85rem; letter-spacing:.02em; opacity:.7; margin:0 0 .6rem; }
+h1{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
+  font-size:clamp(2.4rem, 9vw, 3.4rem); margin:0 0 .8rem; line-height:1.15;
+}
+.hero-sub{ opacity:.75; margin:0 0 2.4rem; font-size:.95rem; }
+
+.begin-btn{
+  font-family:'Nunito Sans', sans-serif; font-size:.95rem; letter-spacing:.02em;
+  padding:.85rem 2rem; border-radius:999px; border:1px solid rgba(243,236,223,.5);
+  background:transparent; color:var(--ivory); cursor:pointer; text-decoration:none;
+  display:inline-block;
+}
+.begin-btn.small{ padding:.65rem 1.4rem; font-size:.85rem; margin-top:.8rem; }
+.begin-btn.dark{ border-color:rgba(58,47,40,.4); color:#3a2f28; }
+
+.letter-text{
+  max-width:34ch; margin:0 auto; white-space:pre-line;
+  font-family:'Cormorant Garamond', serif; font-size:1.3rem; line-height:1.85;
+}
+.emphasis{
+  max-width:34ch; margin:1.4rem auto; text-align:center;
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
+  font-size:1.9rem; color:var(--gold); line-height:1.3;
+}
+
+.signature{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.5rem; margin:2.2rem 0 0;
+}
+.keepsake{ max-width:30ch; margin:0 auto; }
+.keepsake p{ opacity:.85; font-size:.95rem; margin:0 0 1.2rem; }
+#cameraStage{ display:flex; flex-direction:column; align-items:center; gap:.6rem; margin-top:1rem; }
+#cameraStage video{ width:min(80vw,320px); border-radius:10px; }
+.cam-instruction{ font-family:'Cormorant Garamond', serif; font-size:1.1rem; font-style:italic; opacity:.9; max-width:28ch; margin:0 auto .6rem; }
+.polaroid-result{ width:min(80vw,320px); border-radius:6px; box-shadow:0 8px 24px rgba(0,0,0,.35); }
+.after-photo{ font-family:'Cormorant Garamond', serif; font-size:1.05rem; line-height:1.7; white-space:pre-line; margin-top:1rem; max-width:28ch; }
+
+.scroll-hint{ position:absolute; bottom:calc(28px + env(safe-area-inset-bottom,0px)); font-size:1.2rem; opacity:.5; }
+</style>
+</head>
+<body>
+
+<div class="stars-bg" id="starsBg" aria-hidden="true"></div>
+<div class="progress-track" aria-hidden="true"><div class="progress-star" id="progressStar"></div></div>
+<button class="music-toggle" id="musicToggle" aria-label="Toggle music">♪</button>
+<audio id="bgm" src="song.mp3" loop preload="auto"></audio>
+
+<section class="scene hero" id="hero" style="background:#10182b;">
+  <p class="eyebrow">a letter, quietly written</p>
+  <h1>for you, love.</h1>
+  <p class="hero-sub">something i've been wanting to say.</p>
+  <button class="begin-btn" id="beginBtn">begin</button>
+  <span class="scroll-hint">↓</span>
+</section>
+
+<section class="scene chapter" style="background:#141d34;">
+<div class="letter-text">i don't really know how to begin this.
+
+there are so many things i want to say, and somehow, "i love you" doesn't feel enough for what i want you to understand tonight.
+
+because tonight, i don't just want to tell you that i love you.
+
+i want to tell you that i see you.
+
+not just the girl i fell in love with.
+
+but the person behind her.
+
+the person you were before me.
+
+the person you became while i was getting to know you.
+
+and the person you're still becoming today.</div>
+</section>
+
+<section class="scene chapter" style="background:#1c2a4a;">
+<div class="letter-text">sometimes i think about the things you've told me about your childhood.
+
+little things you've mentioned in conversations that you probably didn't think much about.
+
+going to school by yourself when you were still in elementary.
+
+riding public transportation by yourself.
+
+sometimes walking home after school even though your home was far.
+
+and every time i remember those things, i imagine how young you were.
+
+you were just a kid.
+
+and yet, you were already learning how to find your way home.
+
+the heat. the distance. the tiredness. the traffic. carrying your things. just trying to get home after a long day.
+
+ordinary difficulties, maybe. things you probably don't think are a big deal.
+
+but i think about that kid a lot.
+
+and i know your parents have worked abroad since you were young.
+
+i won't pretend to know exactly what that was like for you.
+
+i won't pretend to know every feeling you had growing up.
+
+that's your story, and only you truly know what it felt like.
+
+but knowing even a small part of it makes me appreciate the person you've become even more.</div>
+</section>
+
+<section class="scene chapter" style="background:#2a3355;">
+<div class="letter-text">and love, i'm proud of you.
+
+not because you're strong in the way people usually describe strength.
+
+i don't mean how much you can carry.
+
+i don't mean how much you can endure without complaining.
+
+i mean something much quieter.
+
+you learned how to move forward.
+
+you learned how to guide yourself.
+
+you learned your own limits.
+
+you learned when to continue and when to stop.
+
+you learned how to make decisions for yourself.
+
+and you learned how to keep going even when there wasn't always someone physically beside you to guide every step.</div>
+</section>
+
+<section class="scene chapter" style="background:#42395c;">
+<div class="letter-text">because sometimes i don't think you realize how much i see in you.
+
+i see your effort.
+
+the time you give.
+
+the money you spend.
+
+the little things you remember.
+
+the things you do even when nobody asks you to.
+
+the moments when you could have simply said, "i'm tired," but you still tried.
+
+your patience.
+
+your presence.
+
+the way you make time for me.
+
+maybe i don't always say it at the exact moment you do them.
+
+maybe sometimes i get too caught up in my own thoughts, or school, or whatever is happening around me.
+
+but please know that i notice.</div>
+<p class="emphasis">i notice you.</p>
+<div class="letter-text">and i appreciate you.</div>
+</section>
+
+<section class="scene chapter" style="background:#5c4360;">
+<div class="letter-text">and i hope you know that you're not just some random girl who happened to enter my life.
+
+you're not someone i simply met and started dating.
+
+you're my partner.
+
+you're someone whose life i genuinely care about.
+
+someone whose past makes me want to understand her more.
+
+someone whose present makes me proud.
+
+and someone whose future i want to witness.</div>
+</section>
+
+<section class="scene chapter" style="background:#764a5f;">
+<div class="letter-text">sometimes i wish i could go back.
+
+not to change anything.
+
+not to make her life easier.
+
+not because i think she needed someone to save her.
+
+just to meet her.
+
+just for a moment.
+
+to see the little girl who was already learning how to find her own way.
+
+and tell her:
+
+"you're going to be okay."
+
+"keep going."
+
+"you're going to grow into someone amazing."
+
+"and one day, someone is going to be incredibly proud of you."</div>
+<p class="emphasis">and that someone is me.</p>
+</section>
+
+<section class="scene chapter" style="background:#8f5163;">
+<div class="letter-text">i don't expect you to be perfect.
+
+i don't expect you to be strong every day.
+
+you are allowed to rest.
+
+you are allowed to struggle.
+
+you are allowed to have days where you don't know what you're doing.
+
+and even then, you're still you.
+
+still the girl i love.
+
+still my partner.
+
+i see your past.
+
+i see your present.
+
+and i want to see your future.
+
+not because i expect you to be perfect.
+
+not because i expect you to always be strong.
+
+but because i genuinely want to be there while you continue becoming yourself.</div>
+</section>
+
+<section class="scene chapter" style="background:#b06669;">
+<div class="letter-text">thank you for your time.
+
+thank you for your effort.
+
+thank you for your patience.
+
+thank you for your little sacrifices.
+
+thank you for the things you give.
+
+thank you for the memories.
+
+thank you for trusting me with pieces of your life.
+
+and most of all...
+
+thank you for being you.
+
+i hope you never forget that i see you.
+
+i appreciate you.
+
+and i'm proud of you.
+
+always.</div>
+</section>
+
+<section class="scene closing" id="closing" style="background:#d9a6a1; color:#3a2f28;">
+  <div class="keepsake">
+    <div class="letter-text" style="color:#3a2f28; text-align:center;">before you go...
+
+there's one more thing i want you to see.
+
+you.</div>
+    <div id="cameraStage">
+      <button class="begin-btn small dark" id="openCam">look at yourself</button>
+    </div>
+    <p class="signature" id="signature">— your stan 🍓💗</p>
+  </div>
+</section>
+
+<script>
+// stars
+const starsBg = document.getElementById('starsBg');
+for(let i=0;i<55;i++){
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() < 0.15 ? 3 : 1.6;
+  s.style.width = s.style.height = size+'px';
+  s.style.top = (Math.random()*100)+'%';
+  s.style.left = (Math.random()*100)+'%';
+  s.style.animationDelay = (Math.random()*3.4)+'s';
+  if(Math.random() < 0.15){ s.style.background = 'var(--gold)'; }
+  starsBg.appendChild(s);
+}
+
+// scroll progress star
+const progressStar = document.getElementById('progressStar');
+function updateProgress(){
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+  progressStar.style.top = (p*100)+'%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+
+// music
+const bgm = document.getElementById('bgm');
+const musicToggle = document.getElementById('musicToggle');
+musicToggle.addEventListener('click', ()=>{
+  if(bgm.paused){ bgm.play().catch(()=>{}); musicToggle.textContent='♫'; }
+  else { bgm.pause(); musicToggle.textContent='♪'; }
+});
+
+// begin
+document.getElementById('beginBtn').addEventListener('click', ()=>{
+  bgm.play().then(()=>{ musicToggle.textContent='♫'; }).catch(()=>{});
+  document.querySelector('.chapter').scrollIntoView({behavior:'smooth'});
+});
+
+// camera / keepsake
+const cameraStage = document.getElementById('cameraStage');
+document.getElementById('openCam').addEventListener('click', startCamera);
+
+async function startCamera(){
+  cameraStage.innerHTML =
+    '<p class="cam-instruction">take a picture whenever you\'re ready.<br>not because you need to look perfect.<br>just because i hope that, even for a moment,<br>you can see yourself the way i see you.</p>' +
+    '<video id="camVideo" autoplay playsinline muted></video>' +
+    '<button class="begin-btn small dark" id="snapBtn">capture</button>';
+  const video = document.getElementById('camVideo');
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' }, audio:false });
+    video.srcObject = stream;
+    document.getElementById('snapBtn').addEventListener('click', ()=>{
+      const canvas = makePolaroid(video, true);
+      stream.getTracks().forEach(t=>t.stop());
+      showResult(canvas);
+    });
+  }catch(err){
+    cameraStage.innerHTML =
+      '<p class="cam-instruction">take a picture whenever you\'re ready.<br>not because you need to look perfect.<br>just because i hope that, even for a moment,<br>you can see yourself the way i see you.</p>' +
+      '<label class="begin-btn small dark" for="camFile">take a photo</label>' +
+      '<input type="file" id="camFile" accept="image/*" capture="user" style="display:none">';
+    document.getElementById('camFile').addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const img = new Image();
+      img.onload = ()=> showResult(makePolaroid(img, false));
+      img.src = URL.createObjectURL(file);
+    });
+  }
+}
+
+function makePolaroid(source, mirror){
+  const w = 600, h = 720;
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#f3ecdf';
+  ctx.fillRect(0,0,w,h);
+  const pad = w*0.06;
+  const imgSize = w - pad*2;
+  const sw = source.videoWidth || source.naturalWidth || source.width;
+  const sh = source.videoHeight || source.naturalHeight || source.height;
+  const s = Math.min(sw, sh);
+  const sx = (sw - s)/2, sy = (sh - s)/2;
+  ctx.save();
+  if(mirror){ ctx.translate(w,0); ctx.scale(-1,1); }
+  ctx.drawImage(source, sx, sy, s, s, mirror ? (w-pad-imgSize) : pad, pad, imgSize, imgSize);
+  ctx.restore();
+  ctx.fillStyle = '#3a2f28';
+  ctx.font = 'italic 30px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('i see you. always. ♡', w/2, h - pad*1.5);
+  return canvas;
+}
+
+function showResult(canvas){
+  const dataUrl = canvas.toDataURL('image/png');
+  cameraStage.innerHTML =
+    '<img src="'+dataUrl+'" class="polaroid-result" alt="your keepsake photo">' +
+    '<a href="'+dataUrl+'" download="our-moment.png" class="begin-btn small dark">keep this moment</a>' +
+    '<div class="after-photo">keep this.\n\nand whenever you look at it,\ni hope you remember:\n\nyou are loved.\nyou are appreciated.\nand someone is incredibly proud of you.</div>';
+}
+</script>
+</body>
+</html>
